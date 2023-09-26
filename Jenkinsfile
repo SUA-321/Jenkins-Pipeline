@@ -5,22 +5,13 @@ pipeline {
             steps{
                 echo "Building..."
             }
-            post {
-               always {
-                  script {
-                     def emailSubject = "Build Status Email"
-                     def emailBody = "Build log attached!"
-                       def recipientEmail = "ubaid.a218@gmail.com"
-
-                       // Create the email attachment
-                       def message = "${emailBody}\n\n${currentBuild.rawBuild.getLog()}" 
-
-                    mail to: recipientEmail,
-                    subject: emailSubject,
-                    body: message
+            post{
+                always{
+                    mail to: "ubaid.a218@gmail.com",
+                    subject: "Build Status Email",
+                    body: "Build was Successful!"
+                }
             }
-        }
-    }
         }
         stage("Test"){
             steps{
